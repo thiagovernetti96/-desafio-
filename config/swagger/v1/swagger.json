@@ -1,0 +1,122 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "securityDefinitions": {
+    "signature": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "X-Hub-Signature"
+    }
+  },
+  "paths": {
+    "/v1/events": {
+      "get": {
+        "summary": "List all events",
+        "tags": [
+          "Events"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/issues/{number}/events": {
+      "get": {
+        "summary": "List all events of type issue",
+        "tags": [
+          "Issues"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "number",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "properties": {
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/callback": {
+      "post": {
+        "summary": "Create a event",
+        "tags": [
+          "Webhook"
+        ],
+        "security": [
+          {
+            "signature": [
+
+            ]
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "event",
+            "in": "body",
+            "type": "object"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
