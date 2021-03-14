@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_14_164649) do
+ActiveRecord::Schema.define(version: 2021_03_14_164948) do
 
   create_table "eventos", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 2021_03_14_164649) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_repositories_on_event_id"
+  end
+
+  create_table "senders", force: :cascade do |t|
+    t.json "body"
+    t.integer "evento_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["evento_id"], name: "index_senders_on_evento_id"
   end
 
 end
